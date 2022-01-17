@@ -278,3 +278,56 @@ function nbaCup($r, $t) {
     }
     return $t.':W='.$r['W'].';D='.$r['D'].';L='.$r['L'].';Scored='.$r['S'].';Conceded='.$r['C'].';Points='.$r['P'];
 }
+
+//задание
+//bitsWar([1,5,12]) => "odds win" //1+101 vs 1100, 3 vs 2
+//bitsWar([7,-3,20]) => "evens win" //111-11 vs 10100, 3-2 vs 2
+//bitsWar([7,-3,-2,6]) => "tie" //111-11 vs -1+110, 3-2 vs -1+2
+
+
+/// мое решение
+function bitsWar($numbers){
+    $odd = [];
+    $even = [];
+    foreach ($numbers as $num) {
+        if ($num % 2 == 0) {
+            $even[] = $num < 0 ? -array_sum(str_split(decbin(abs($num)))) : array_sum(str_split(decbin($num)));
+        } else {
+            $odd[] = $num < 0 ? -array_sum(str_split(decbin(abs($num)))) : array_sum(str_split(decbin($num)));
+        }
+    }
+    $odd_sum = array_sum($odd);
+    $even_sum = array_sum($even);
+
+    if ($odd_sum == $even_sum) return 'tie';
+    return $odd_sum > $even_sum ? 'odds win' : 'evens win';
+}
+
+/// лучшее
+function bitsWar(array $numbers):string {
+    $score = 0;
+
+    foreach($numbers as $num) {
+        $sum = substr_count(decbin(abs($num)), 1);
+        $score += (($num % 2) == 0) ? (($num > 0) ? $sum : -$sum) : (($num > 0) ? -$sum : $sum);
+    }
+
+    return (!$score) ? 'tie' : (($score > 0) ? 'evens win' : 'odds win');
+}
+
+
+function bitsWar($numbers){
+    $odd = 0;
+    $even = 0;
+    foreach ($numbers as $num) {
+        if ($num == 0) {
+            continue;
+        } elseif ($num % 2 != 0) {
+            $odd += substr_count(decbin(abs($num)), '1') * ($num < 0 ? -1 : 1);
+        } else {
+            $even += substr_count(decbin(abs($num)), '1') * ($num < 0 ? -1 : 1);
+        }
+    }
+    if ($odd == $even) return 'tie';
+    return ($odd > $even ? 'odds' : 'evens') . ' win';
+}
