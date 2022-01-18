@@ -1,25 +1,11 @@
 <?php
-function bitsWar($numbers){
-    $odd = [];
-    $even = [];
-    foreach ($numbers as $num) {
-        if ($num % 2 == 0) {
-            $even[] = $num < 0 ? -array_sum(str_split(decbin(abs($num)))) : array_sum(str_split(decbin($num)));
-        } else {
-            $odd[] = $num < 0 ? -array_sum(str_split(decbin(abs($num)))) : array_sum(str_split(decbin($num)));
-        }
-    }
-    $odd_sum = array_sum($odd);
-    $even_sum = array_sum($even);
-
-    if ($odd_sum == $even_sum) return 'tie';
-    return $odd_sum > $even_sum ? 'odds win' : 'evens win';
+function solution($number){
+    return array_sum(array_map(function($el) {
+        return $el%3 === 0 || $el%5 === 0 ? $el : 0;
+    }, range(1, $number-1)));
 }
 
 //var_dump(decbin(abs(-3)));
 
-var_dump(bitsWar([2,3,-5,20]));
+var_dump(solution(10));
 echo '<br>';
-var_dump(bitsWar([1,5,12]));
-echo '<br>';
-var_dump(bitsWar([7,-3,20]));
