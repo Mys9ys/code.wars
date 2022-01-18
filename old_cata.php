@@ -349,3 +349,42 @@ function solution($number){
         return $item % 3 == 0 || $item % 5 == 0;
     }));
 }
+
+//задание
+//89 --> 8¹ + 9² = 89 * 1
+//695 --> 6² + 9³ + 5⁴= 1390 = 695 * 2
+//46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 * 51
+
+
+/// мое решение
+function digPow($n, $p) {
+    $arr2[] = [];
+    foreach (str_split((string)$n) as $i=>$el){
+        $arr2[] = intval($el)**($p++);
+    }
+
+    $sum = array_sum($arr2);
+    if($sum<$n) return -1;
+    return $sum%$n == 0 ? $sum/$n : -1;
+}
+
+/// лучшее
+function digPow($n, $p) {
+    $sum = 0;
+
+    foreach(str_split($n) as $number) {
+        $sum += $number ** $p++;
+    }
+
+    return (($sum % $n) == 0) ?
+        ($sum / $n) : -1 ;
+}
+
+
+function digPow($n, $p) {
+    $mathSum = 0;
+    foreach (str_split((string)$n) as $index => $value) {
+        $mathSum += pow($value, $index + $p);
+    }
+    return (is_int($mathSum/$n)) ? $mathSum/$n : -1;
+}
