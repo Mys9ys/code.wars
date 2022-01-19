@@ -388,3 +388,23 @@ function digPow($n, $p) {
     }
     return (is_int($mathSum/$n)) ? $mathSum/$n : -1;
 }
+
+//задание
+//[1, 3, 4]  =>  2
+//[1, 2, 3]  =>  4
+//[4, 2, 3]  =>  1
+
+/// мое решение
+function find_number(array $a) {
+    return current(array_filter(range(1, count($a)+1), function ($el) use($a) {return !in_array($el, $a);}));
+}
+
+/// лучшее
+function find_number(array $a): int {
+    return ((count($a) + 1) * (count($a) + 2) / 2) - array_sum($a);
+}
+
+function find_number(array $a): int {
+    return array_sum(range(1, count($a) + 1)) - array_sum($a);
+}
+

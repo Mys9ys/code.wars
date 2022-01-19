@@ -1,17 +1,10 @@
 <?php
-function digPow($n, $p) {
-    $arr2[] = [];
-    foreach (str_split((string)$n) as $i=>$el){
-        $arr2[] = intval($el)**($p++);
-    }
-
-    $sum = array_sum($arr2);
-    if($sum<$n) return -1;
-    return $sum%$n == 0 ? $sum/$n : -1;
+function find_number(array $a) {
+    return current(array_filter(range(1, count($a)+1), function ($el) use($a) {return !in_array($el, $a);}));
 }
 
 //var_dump(decbin(abs(-3)));
 
-var_dump(digPow(89, 1));
-var_dump(digPow(46288, 3));
+var_dump(find_number([1, 3]));
+//var_dump(digPow(46288, 3));
 echo '<br>';
