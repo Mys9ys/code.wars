@@ -408,3 +408,32 @@ function find_number(array $a): int {
     return array_sum(range(1, count($a) + 1)) - array_sum($a);
 }
 
+// задание
+//findUniq([ 1, 1, 1, 2, 1, 1 ]) === 2
+//findUniq([ 0, 0, 0.55, 0, 0 ]) === 0.55
+
+
+/// мое решение - не решено (жрет память)
+function find_uniq($a) {
+    sort($a);
+    return $a[0] !== $a[1] ? $a[0] : array_pop($a);
+}
+
+/// лучшее
+function find_uniq($a) {
+    sort($a);
+
+    return ($a[0] === $a[1]) ? end($a) : current($a);
+}
+
+function find_uniq($a) {
+    ini_set('memory_limit', '136M');
+    return array_search(1, array_count_values(array_map(function($e){return is_float($e) ? strval($e) : $e;},$a)));
+}
+
+function find_uniq($a) {
+    foreach ($a as $value) {
+        $tab["$value"]++;
+    }
+    return array_search(1,$tab);
+}
