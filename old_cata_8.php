@@ -21,3 +21,27 @@ function symmetric_point($p, $q) {
 }
 
 /// лучшее аналогично
+
+
+// задание Exclamation marks series #2: Remove all exclamation marks from the end of sentence
+//remove("Hi!") === "Hi"
+//remove("Hi!!!") === "Hi"
+//remove("!Hi") === "!Hi"
+//remove("!Hi!") === "!Hi"
+//remove("Hi! Hi!") === "Hi! Hi"
+//remove("Hi") === "Hi"
+
+
+/// мое решение
+function remove(string $s): string {
+    return  rtrim($s, '!');
+}
+
+/// лучшее
+function remove($s){
+    return preg_replace("/!+$/","",$s);
+}
+
+function remove(string $s): string {
+    return substr($s,-1) === '!' ? remove(substr($s, 0, -1)) : $s;
+}
