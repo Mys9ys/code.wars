@@ -1,13 +1,9 @@
 <?php
-function remove(string $s): string {
-    $arr = str_split($s);
-    $first = '';
-    if($arr[0] === '!') $first ='!';
-    return $first . implode('', array_filter($arr, function ($el) {return $el != '!';}));
+function dutyFree($normPrice, $discount, $hol) {
+    return intval($hol/($discount*$normPrice/100));
 }
-//var_dump(decbin(abs(-3)));
-
-var_dump(remove("!Hi!"));
+var_dump(dutyFree(12, 50, 1000));
+//var_dump(finalGrade(85, 5));
 
 
 //var_dump(digPow(46288, 3));
