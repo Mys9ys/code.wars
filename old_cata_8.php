@@ -115,3 +115,19 @@ function twice_as_old($dad_years_old, $son_years_old, $year=0) {
 function twice_as_old($dad_years_old, $son_years_old) {
     return abs( $dad_years_old - $son_years_old * 2);
 }
+
+//задание Beginner Series #1 School Paperwork
+//n= 5, m=5: 25
+//n=-5, m=5:  0
+
+// мое решение
+function paperwork(int $n, int $m): int
+{
+    return $n> 0 && $m > 0 ? $n*$m : 0;
+}
+
+// лучшее
+function paperwork(int $n, int $m): int
+{
+    return max(0, $n) * max(0, $m);
+}
