@@ -84,3 +84,34 @@ function dutyFree($normPrice, $discount, $hol) {
 function dutyFree($p, $d, $h) {
     return floor($h / ($p * $d / 100));
 }
+
+
+
+//задание Twice as old
+//var_dump(twice_as_old(36, 7)); //22
+//var_dump(twice_as_old(55, 30)); //5
+
+// мое решение
+function twice_as_old($dad_years_old, $son_years_old, $year=0) {
+    if($son_years_old === 0) return $dad_years_old;
+
+    if ($dad_years_old / $son_years_old === 2) return $year;
+
+    if ($dad_years_old / $son_years_old > 2) {
+        $dad_years_old++;
+        $son_years_old++;
+    }
+
+    if ($dad_years_old / $son_years_old < 2) {
+        $dad_years_old--;
+        $son_years_old--;
+    }
+    $year++;
+    return twice_as_old($dad_years_old, $son_years_old, $year);
+}
+
+
+// лучшее
+function twice_as_old($dad_years_old, $son_years_old) {
+    return abs( $dad_years_old - $son_years_old * 2);
+}
