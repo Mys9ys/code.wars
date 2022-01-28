@@ -131,3 +131,15 @@ function paperwork(int $n, int $m): int
 {
     return max(0, $n) * max(0, $m);
 }
+
+//задание Reversed Words
+
+// мое решение
+function reverseWords($str) {
+    return implode(' ', array_reverse(explode( ' ', $str)));
+}
+
+// лучшее
+function reverseWords($str) {
+    return join(' ', array_reverse(explode(' ', $str)));
+}
