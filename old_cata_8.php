@@ -143,3 +143,18 @@ function reverseWords($str) {
 function reverseWords($str) {
     return join(' ', array_reverse(explode(' ', $str)));
 }
+
+//задание How good are you really?
+//true, betterThanAverage([100, 40, 34, 57, 29, 72, 57, 88], 75)
+
+// мое решение
+function betterThanAverage($classPoints, $yourPoints)
+{
+    array_push($classPoints, $yourPoints);
+    return array_sum($classPoints) / count($classPoints) < $yourPoints ? true : false;
+}
+
+// лучшее
+function betterThanAverage($c, $y) {
+    return $y > array_sum($c) / count($c);
+}
