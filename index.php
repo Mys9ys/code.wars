@@ -1,11 +1,15 @@
 <?php
 include 'function.php';
 
-function alphabet_position(string $s) {
-    mys9ys_debug(ord('a'));
+function alphabet_position(string $s)
+{
+    $alf = range('a', 'z');
+    return trim(preg_replace('/ {2,}/', ' ', join(' ', array_map(function ($el) use ($alf) {
+        if (array_search(strtolower($el), $alf) > -1) return array_search(strtolower($el), $alf) + 1;
+    }, str_split($s)))));
 }
 
-var_dump(alphabet_position('20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11')); //22
+var_dump(alphabet_position('The sunset sets at twelve o\' clock.')); //22
 echo '<br>';
 //var_dump(twice_as_old(55, 30)); //5
 echo '<br>';

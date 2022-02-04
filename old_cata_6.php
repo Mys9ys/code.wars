@@ -437,3 +437,31 @@ function find_uniq($a) {
     }
     return array_search(1,$tab);
 }
+// задание Replace With Alphabet Position
+//"a" = 1, "b" = 2, etc.
+//alphabet_position("The sunset sets at twelve o' clock.")
+//"20 8 5 19 21 14 19 5 20 19 5 20 19 1 20 20 23 5 12 22 5 15 3 12 15 3 11"
+
+// мое решение
+ function alphabet_position(string $s)
+{
+    $alf = range('a', 'z');
+    return trim(preg_replace('/ {2,}/', ' ', join(' ', array_map(function ($el) use ($alf) {
+        if (array_search(strtolower($el), $alf) > -1) return array_search(strtolower($el), $alf) + 1;
+    }, str_split($s)))));
+}
+
+// лучшее
+function alphabet_position(string $s):string {
+    return implode(' ', array_filter(array_map(function($x){
+        return array_search($x, str_split('_abcdefghijklmnopqrstuvwxyz'));}, str_split(strtolower($s)))));
+}
+
+function alphabet_position(string $s): string {
+    preg_match_all('/[a-z]/', strtolower($s), $out);
+    return join(' ', array_map(function($ch){return ord($ch) - 96;}, $out[0]));
+}
+
+function alphabet_position(string $s): string {
+    return implode(' ', array_map(function($c){ return ord($c)-64;}, array_filter(str_split(strtoupper($s)), 'ctype_alpha')));
+}
